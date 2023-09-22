@@ -1,13 +1,28 @@
 package scientificCalculatorPack;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class CalculatorUI extends JFrame {
     private JTextField displayField;
+
+    // Set dark mode as the default theme
+    private boolean isDarkMode = true;
+    private JPanel buttonPanel;
 
     public CalculatorUI() {
         setTitle("Scientific Calculator");
@@ -18,16 +33,17 @@ public class CalculatorUI extends JFrame {
         // Create the display field
         displayField = new JTextField();
         displayField.setEditable(false);
-        displayField.setFont(new Font("Segoe UI", Font.PLAIN, 36)); // Change font and size
+        displayField.setFont(new Font("Segoe UI", Font.PLAIN, 36));
         displayField.setHorizontalAlignment(JTextField.RIGHT);
-        displayField.setBackground(Color.WHITE); // Set background color
-        displayField.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add a border
+        displayField.setBackground(Color.BLACK); // Set the background color for dark mode
+        displayField.setForeground(Color.WHITE); // Set the text color for dark mode
+        displayField.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         
         // Allocate 20% of the frame for the display
         getContentPane().add(displayField, BorderLayout.NORTH);
         
         // Create the button panel with a GridBagLayout for better alignment
-        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel = new JPanel(new GridBagLayout());
 
         // Define button labels
         String[] buttonLabels = {
@@ -45,7 +61,7 @@ public class CalculatorUI extends JFrame {
         // Create and add buttons to the panel
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.insets = new Insets(5, 5, 5, 5); // Add padding
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
 
@@ -54,7 +70,7 @@ public class CalculatorUI extends JFrame {
 
         for (String label : buttonLabels) {
             JButton button = new JButton(label);
-            button.setFont(new Font("Segoe UI", Font.PLAIN, 18)); // Change font and size
+            button.setFont(new Font("Segoe UI", Font.PLAIN, 18));
             button.addActionListener(new ButtonClickListener());
 
             gbc.gridx = column;
@@ -68,7 +84,10 @@ public class CalculatorUI extends JFrame {
             }
         }
 
-        getContentPane().add(buttonPanel, BorderLayout.CENTER); // Use the center for the buttons
+        getContentPane().add(buttonPanel, BorderLayout.CENTER);
+
+        // Set the initial theme
+        updateTheme();
 
         // Make the frame visible
         setVisible(true);
@@ -87,11 +106,50 @@ public class CalculatorUI extends JFrame {
             } else if (buttonText.equals("CE")) {
                 // Clear the display
                 displayField.setText("");
+            } else if (buttonText.equals("Theme Mode")) {
+                // Toggle theme mode
+                isDarkMode = !isDarkMode;
+                updateTheme();
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
             }
         }
+    }
+
+    // Method to update the UI based on the current theme mode
+    private void updateTheme() {
+        if (isDarkMode) {
+            // Apply dark theme colors
+            displayField.setBackground(Color.BLACK);
+            displayField.setForeground(Color.WHITE);
+            getContentPane().setBackground(Color.DARK_GRAY);
+
+            buttonPanel.setBackground(Color.DARK_GRAY);
+            for (Component component : buttonPanel.getComponents()) {
+                if (component instanceof JButton) {
+                    JButton button = (JButton) component;
+                    button.setBackground(Color.BLACK);
+                    button.setForeground(Color.WHITE);
+                }
+            }
+        } else {
+            // Apply white theme colors
+            displayField.setBackground(Color.WHITE);
+            displayField.setForeground(Color.BLACK);
+            getContentPane().setBackground(Color.LIGHT_GRAY);
+
+            buttonPanel.setBackground(Color.LIGHT_GRAY);
+            for (Component component : buttonPanel.getComponents()) {
+                if (component instanceof JButton) {
+                    JButton button = (JButton) component;
+                    button.setBackground(Color.WHITE);
+                    button.setForeground(Color.BLACK);
+                }
+            }
+        }
+        // Repaint the UI to reflect the changes
+        repaint();
     }
 
     public static void main(String[] args) {
