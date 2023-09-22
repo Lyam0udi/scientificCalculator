@@ -17,12 +17,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import scientificCalculatorPack.CalculatorEngine;
+
+
+// This class represents the graphical user interface (GUI) of the calculator
 public class CalculatorUI extends JFrame {
     private JTextField displayField;
 
     // Set dark mode as the default theme
     private boolean isDarkMode = true;
     private JPanel buttonPanel;
+    
+    private CalculatorEngine calculatorEngine = new CalculatorEngine();
 
     public CalculatorUI() {
         setTitle("Scientific Calculator");
@@ -47,15 +53,15 @@ public class CalculatorUI extends JFrame {
 
         // Define button labels
         String[] buttonLabels = {
-            "2nd", "π", "e", "CE",
+        	"CE","On", "OFF", "Theme Mode",
+            "2nd", "π", "e", "%",
+            "x^y", "|x|", "exp", "mod",
+            "n!","(", ")", "ln",
             "x²", "1/x", "√", "/",
             "7", "8", "9", "×",
             "4", "5", "6", "-",
             "1", "2", "3", "+",
-            "ln", "+/-", "0", ".", "=",
-            "(", ")", "n!", "%",
-            "x^y", "|x|", "exp", "mod",
-            "On", "OFF", "Theme Mode"
+            "+/-", "0", ".", "="
         };
 
         // Create and add buttons to the panel
@@ -101,8 +107,9 @@ public class CalculatorUI extends JFrame {
 
             // Handle button clicks here
             if (buttonText.equals("=")) {
-                // Calculate and display result
-                // You'll implement this logic here
+                String expression = displayField.getText();
+                double result = calculatorEngine.evaluateExpression(expression);
+                displayField.setText(Double.toString(result));
             } else if (buttonText.equals("CE")) {
                 // Clear the display
                 displayField.setText("");
@@ -116,6 +123,7 @@ public class CalculatorUI extends JFrame {
             }
         }
     }
+
 
     // Method to update the UI based on the current theme mode
     private void updateTheme() {
