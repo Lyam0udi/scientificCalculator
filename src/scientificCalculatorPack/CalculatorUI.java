@@ -54,10 +54,10 @@ public class CalculatorUI extends JFrame {
         // Define button labels
         String[] buttonLabels = {
         	"CE","On", "OFF", "Theme Mode",
-            "2nd", "π", "e", "%",
-            "x^y", "|x|", "exp", "mod",
-            "n!","(", ")", "ln",
-            "x²", "1/x", "√", "/",
+            "2nd", "π", "e", "mod",
+            "x^y", "|x|", "x²", "1/x",
+            "√","exp", "n!", "ln",
+            "(", ")", "%", "/",
             "7", "8", "9", "×",
             "4", "5", "6", "-",
             "1", "2", "3", "+",
