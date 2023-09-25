@@ -17,8 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import scientificCalculatorPack.CalculatorEngine;
-
 
 // This class represents the graphical user interface (GUI) of the calculator
 public class CalculatorUI extends JFrame {
