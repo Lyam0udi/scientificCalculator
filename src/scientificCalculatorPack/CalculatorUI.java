@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 // This class represents the graphical user interface (GUI) of the calculator
 public class CalculatorUI extends JFrame {
     private JTextField displayField;
+    
+    private boolean isCalculatorOn = true; // Default to ON
 
     // Set dark mode as the default theme
     private boolean isDarkMode = true;
@@ -56,7 +58,7 @@ public class CalculatorUI extends JFrame {
             "x^y", "|x|", "x²", "1/x",
             "√","exp", "n!", "ln",
             "(", ")", "%", "/",
-            "7", "8", "9", "×",
+            "7", "8", "9", "*",
             "4", "5", "6", "-",
             "1", "2", "3", "+",
             "+/-", "0", ".", "="
@@ -87,11 +89,17 @@ public class CalculatorUI extends JFrame {
                 row++;
             }
         }
+        
+        
 
         getContentPane().add(buttonPanel, BorderLayout.CENTER);
 
         // Set the initial theme
         updateTheme();
+       
+        setButtonsEnabled(isCalculatorOn); // Set initial state
+
+        
 
         // Make the frame visible
         setVisible(true);
@@ -115,6 +123,12 @@ public class CalculatorUI extends JFrame {
                 // Toggle theme mode
                 isDarkMode = !isDarkMode;
                 updateTheme();
+            } else if (buttonText.equals("On")) {
+            	isCalculatorOn = true;
+                setButtonsEnabled(true);
+            } else if (buttonText.equals("OFF")) {
+            	isCalculatorOn = false;
+                setButtonsEnabled(false);
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
@@ -157,8 +171,25 @@ public class CalculatorUI extends JFrame {
         // Repaint the UI to reflect the changes
         repaint();
     }
+    
+    // Method to apply the ON/OFF Mode.
+    
+    private void setButtonsEnabled(boolean enabled) {
+        for (Component component : buttonPanel.getComponents()) {
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                if (!button.getText().equals("On")) { // Skip the "On" button
+                    button.setEnabled(enabled);
+                }
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new CalculatorUI());
     }
+    
+    
+
 }
