@@ -129,7 +129,15 @@ public class CalculatorUI extends JFrame {
             } else if (buttonText.equals("OFF")) {
             	isCalculatorOn = false;
                 setButtonsEnabled(false);
-            } else {
+            } else if (buttonText.equals("+/-")) {
+                // Negate the number currently displayed
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double currentValue = Double.parseDouble(currentText);
+                    double negatedValue = (-1)*currentValue;
+                    displayField.setText(Double.toString(negatedValue));
+                }
+            }  else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
             }
