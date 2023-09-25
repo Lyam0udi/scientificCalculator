@@ -13,6 +13,11 @@ public class CalculatorEngine {
     // Method to evaluate a mathematical expression
     public double evaluateExpression(String expression) {
         try {
+        	
+        	// Check if the expression is a number (positive or negative)
+            if (expression.matches("-?\\d+(\\.\\d+)?")) {
+                return Double.parseDouble(expression);
+            }
             // Create a stack to store operands
             Stack<Double> operandStack = new Stack<>();
 
