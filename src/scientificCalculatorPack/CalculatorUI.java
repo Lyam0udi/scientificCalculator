@@ -218,6 +218,26 @@ public class CalculatorUI extends JFrame {
                         displayField.setText("Error: ln of a non-positive number");
                     }
                 }
+            } else if (buttonText.equals("n!")) {
+                // Handle the "n!" button to calculate the factorial (n!)
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    try {
+                        int number = Integer.parseInt(currentText);
+                        if (number >= 0) { // Factorial is only defined for non-negative integers
+                            int factorial = 1;
+                            for (int i = 2; i <= number; i++) {
+                                factorial *= i;
+                            }
+                            displayField.setText(Integer.toString(factorial));
+                        } else {
+                            // Handle factorial of a negative number error if necessary
+                            displayField.setText("Error: Factorial of a negative number");
+                        }
+                    } catch (NumberFormatException ex) {
+                        displayField.setText("Error: Invalid input");
+                    }
+                }
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
