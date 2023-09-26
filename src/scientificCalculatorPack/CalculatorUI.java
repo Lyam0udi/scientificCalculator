@@ -54,7 +54,7 @@ public class CalculatorUI extends JFrame {
         // Define button labels
         String[] buttonLabels = {
         	"CE","On", "OFF", "Theme Mode",
-            "2nd", "π", "e", "mod",
+            "2nd", "π", "e", "Delete",
             "x^y", "|x|", "x²", "1/x",
             "√","exp", "n!", "ln",
             "(", ")", "%", "/",
@@ -105,7 +105,7 @@ public class CalculatorUI extends JFrame {
         setVisible(true);
     }
 
-    // ActionListener for all calculator buttons
+ // ActionListener for all calculator buttons
     private class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();
@@ -124,25 +124,33 @@ public class CalculatorUI extends JFrame {
                 isDarkMode = !isDarkMode;
                 updateTheme();
             } else if (buttonText.equals("On")) {
-            	isCalculatorOn = true;
+                isCalculatorOn = true;
                 setButtonsEnabled(true);
             } else if (buttonText.equals("OFF")) {
-            	isCalculatorOn = false;
+                isCalculatorOn = false;
                 setButtonsEnabled(false);
             } else if (buttonText.equals("+/-")) {
                 // Negate the number currently displayed
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double currentValue = Double.parseDouble(currentText);
-                    double negatedValue = (-1)*currentValue;
+                    double negatedValue = (-1) * currentValue;
                     displayField.setText(Double.toString(negatedValue));
                 }
-            }  else {
+            } else if (buttonText.equals("Delete")) {
+                // Delete the last character from the display
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    String newText = currentText.substring(0, currentText.length() - 1);
+                    displayField.setText(newText);
+                }
+            } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
             }
         }
     }
+
 
 
     // Method to update the UI based on the current theme mode
