@@ -147,6 +147,9 @@ public class CalculatorUI extends JFrame {
             } else if (buttonText.equals("e")) {
                 // Append the mathematical constant "e" to the display
                 displayField.setText(displayField.getText() + Math.E);
+            } else if (buttonText.equals("π")) {
+                // Append the mathematical constant "π" to the display
+                displayField.setText(displayField.getText() + Math.PI);
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
