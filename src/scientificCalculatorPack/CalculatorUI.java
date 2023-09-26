@@ -158,6 +158,19 @@ public class CalculatorUI extends JFrame {
                     double result = Math.pow(2, exponent);
                     displayField.setText(Double.toString(result));
                 }
+            } else if (buttonText.equals("1/x")) {
+                // Handle the "1/x" button to calculate the reciprocal (1/x)
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double number = Double.parseDouble(currentText);
+                    if (number != 0) {
+                        double reciprocal = 1.0 / number;
+                        displayField.setText(Double.toString(reciprocal));
+                    } else {
+                        // Handle division by zero error if necessary
+                        displayField.setText("Error: Division by zero");
+                    }
+                }
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
