@@ -179,7 +179,15 @@ public class CalculatorUI extends JFrame {
                     double square = number * number;
                     displayField.setText(Double.toString(square));
                 }
-            } else {
+            } else if (buttonText.equals("|x|")) {
+                // Handle the "|x|" button to calculate the absolute value (|x|)
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double number = Double.parseDouble(currentText);
+                    double absoluteValue = Math.abs(number);
+                    displayField.setText(Double.toString(absoluteValue));
+                }
+            }  else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
             }
