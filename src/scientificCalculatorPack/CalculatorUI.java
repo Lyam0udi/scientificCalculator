@@ -238,6 +238,14 @@ public class CalculatorUI extends JFrame {
                         displayField.setText("Error: Invalid input");
                     }
                 }
+            } else if (buttonText.equals("exp")) {
+                // Handle the "exp" button to calculate e^x
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double number = Double.parseDouble(currentText);
+                    double expValue = Math.exp(number);
+                    displayField.setText(Double.toString(expValue));
+                }
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
