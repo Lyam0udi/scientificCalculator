@@ -207,12 +207,4 @@ public class CalculatorUI extends JFrame {
             }
         }
     }
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new CalculatorUI());
-    }
-    
-    
-
 }
