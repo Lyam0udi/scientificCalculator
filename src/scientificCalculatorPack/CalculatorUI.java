@@ -171,6 +171,14 @@ public class CalculatorUI extends JFrame {
                         displayField.setText("Error: Division by zero");
                     }
                 }
+            } else if (buttonText.equals("x²")) {
+                // Handle the "x²" button to calculate the square (x²)
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double number = Double.parseDouble(currentText);
+                    double square = number * number;
+                    displayField.setText(Double.toString(square));
+                }
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
