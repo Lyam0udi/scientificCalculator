@@ -205,6 +205,19 @@ public class CalculatorUI extends JFrame {
                         }
                     }
                 }
+            }else if (buttonText.equals("ln")) {
+                // Handle the "ln" button to calculate the natural logarithm (ln)
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double number = Double.parseDouble(currentText);
+                    if (number > 0) { // ln is only defined for positive numbers
+                        double lnValue = Math.log(number);
+                        displayField.setText(Double.toString(lnValue));
+                    } else {
+                        // Handle ln of a non-positive number error if necessary
+                        displayField.setText("Error: ln of a non-positive number");
+                    }
+                }
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
