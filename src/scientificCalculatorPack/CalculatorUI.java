@@ -150,6 +150,14 @@ public class CalculatorUI extends JFrame {
             } else if (buttonText.equals("π")) {
                 // Append the mathematical constant "π" to the display
                 displayField.setText(displayField.getText() + Math.PI);
+            } else if (buttonText.equals("2nd")) {
+                // Handle the "2nd" button to calculate 2^number
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double exponent = Double.parseDouble(currentText);
+                    double result = Math.pow(2, exponent);
+                    displayField.setText(Double.toString(result));
+                }
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
