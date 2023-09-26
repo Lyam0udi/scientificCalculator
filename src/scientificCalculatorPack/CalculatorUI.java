@@ -105,7 +105,7 @@ public class CalculatorUI extends JFrame {
         setVisible(true);
     }
 
- // ActionListener for all calculator buttons
+    // ActionListener for all calculator buttons
     private class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();
@@ -144,12 +144,16 @@ public class CalculatorUI extends JFrame {
                     String newText = currentText.substring(0, currentText.length() - 1);
                     displayField.setText(newText);
                 }
+            } else if (buttonText.equals("e")) {
+                // Append the mathematical constant "e" to the display
+                displayField.setText(displayField.getText() + Math.E);
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
             }
         }
     }
+
 
 
 
