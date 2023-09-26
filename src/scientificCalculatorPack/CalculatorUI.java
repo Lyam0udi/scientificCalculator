@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -187,7 +188,24 @@ public class CalculatorUI extends JFrame {
                     double absoluteValue = Math.abs(number);
                     displayField.setText(Double.toString(absoluteValue));
                 }
-            }  else {
+            } else if (buttonText.equals("x^y")) {
+                // Handle the "x^y" button to calculate exponentiation (x^y)
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    // Prompt the user for the value of y
+                    String yText = JOptionPane.showInputDialog("Enter the exponent (y):");
+                    if (yText != null) {
+                        try {
+                            double base = Double.parseDouble(currentText);
+                            double exponent = Double.parseDouble(yText);
+                            double result = Math.pow(base, exponent);
+                            displayField.setText(Double.toString(result));
+                        } catch (NumberFormatException ex) {
+                            displayField.setText("Error: Invalid input");
+                        }
+                    }
+                }
+            } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
             }
