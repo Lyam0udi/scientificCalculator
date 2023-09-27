@@ -105,23 +105,30 @@ public class CalculatorUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();
             String buttonText = source.getText();
-
+            
+            // Handle different button actions based on the button's text
             if (buttonText.equals("=")) {
+            	// Calculate the result when "=" is pressed
                 String expression = displayField.getText();
                 double result = calculatorEngine.evaluateExpression(expression);
                 displayField.setText(Double.toString(result));
             } else if (buttonText.equals("CE")) {
+            	// Clear the display when "CE" is pressed
                 displayField.setText("");
             } else if (buttonText.equals("Theme Mode")) {
+            	// Toggle dark mode when "Theme Mode" is pressed
                 isDarkMode = !isDarkMode;
                 updateTheme();
             } else if (buttonText.equals("On")) {
+            	// Turn the calculator on
                 isCalculatorOn = true;
                 setButtonsEnabled(true);
             } else if (buttonText.equals("OFF")) {
+            	// Turn the calculator off
                 isCalculatorOn = false;
                 setButtonsEnabled(false);
             } else if (buttonText.equals("+/-")) {
+            	// Negate the current value
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double currentValue = Double.parseDouble(currentText);
@@ -129,16 +136,20 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(negatedValue));
                 }
             } else if (buttonText.equals("Delete")) {
+            	// Delete the last character in the display
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     String newText = currentText.substring(0, currentText.length() - 1);
                     displayField.setText(newText);
                 }
             } else if (buttonText.equals("e")) {
+            	// Append the mathematical constant "e" to the display
                 displayField.setText(displayField.getText() + Math.E);
             } else if (buttonText.equals("π")) {
+            	 // Append the mathematical constant "π" to the display
                 displayField.setText(displayField.getText() + Math.PI);
             } else if (buttonText.equals("2nd")) {
+            	// Calculate the square of a number
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double exponent = Double.parseDouble(currentText);
@@ -146,6 +157,7 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(result));
                 }
             } else if (buttonText.equals("1/x")) {
+            	// Calculate the reciprocal of a number
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -157,6 +169,7 @@ public class CalculatorUI extends JFrame {
                     }
                 }
             } else if (buttonText.equals("x²")) {
+            	// Calculate the square of the current value
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -164,6 +177,7 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(square));
                 }
             } else if (buttonText.equals("|x|")) {
+            	// Calculate the absolute value of the current value
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -171,6 +185,7 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(absoluteValue));
                 }
             } else if (buttonText.equals("x^y")) {
+            	// Calculate the result of x raised to the power of y
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     String yText = JOptionPane.showInputDialog("Enter the exponent (y):");
@@ -185,7 +200,8 @@ public class CalculatorUI extends JFrame {
                         }
                     }
                 }
-            }else if (buttonText.equals("ln")) {
+            } else if (buttonText.equals("ln")) {
+            	// Calculate the natural logarithm of the current value
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -197,6 +213,7 @@ public class CalculatorUI extends JFrame {
                     }
                 }
             } else if (buttonText.equals("n!")) {
+            	// Calculate the factorial of a number
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     try {
@@ -215,6 +232,7 @@ public class CalculatorUI extends JFrame {
                     }
                 }
             } else if (buttonText.equals("exp")) {
+            	// Calculate the exponential function of the current value
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -222,6 +240,7 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(expValue));
                 }
             } else if (buttonText.equals("√")) {
+            	// Calculate the square root of the current value
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -233,6 +252,7 @@ public class CalculatorUI extends JFrame {
                     }
                 }
             } else if (buttonText.equals("%")) {
+            	// Calculate the percentage of the current value
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -240,50 +260,81 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(percentageValue));
                 }
             } else {
+            	// Append the button's text to the display
                 displayField.setText(displayField.getText() + buttonText);
             }
         }
     }
 
     private void updateTheme() {
+        // Check if the dark mode is enabled
         if (isDarkMode) {
-            displayField.setBackground(Color.BLACK);
-            displayField.setForeground(Color.WHITE);
-            getContentPane().setBackground(Color.DARK_GRAY);
-
-            buttonPanel.setBackground(Color.DARK_GRAY);
-            for (Component component : buttonPanel.getComponents()) {
-                if (component instanceof JButton) {
-                    JButton button = (JButton) component;
-                    button.setBackground(Color.BLACK);
-                    button.setForeground(Color.WHITE);
-                }
-            }
+            // Dark Mode Theme
+            setDarkModeTheme();
         } else {
-            displayField.setBackground(Color.WHITE);
-            displayField.setForeground(Color.BLACK);
-            getContentPane().setBackground(Color.LIGHT_GRAY);
-
-            buttonPanel.setBackground(Color.LIGHT_GRAY);
-            for (Component component : buttonPanel.getComponents()) {
-                if (component instanceof JButton) {
-                    JButton button = (JButton) component;
-                    button.setBackground(Color.WHITE);
-                    button.setForeground(Color.BLACK);
-                }
-            }
+            // Light Mode Theme
+            setLightModeTheme();
         }
+        
+        // Repaint the components to apply the theme changes
         repaint();
     }
-    
-    private void setButtonsEnabled(boolean enabled) {
+
+    private void setDarkModeTheme() {
+        // Set the background and foreground colors for the display field
+        displayField.setBackground(Color.BLACK);
+        displayField.setForeground(Color.WHITE);
+        
+        // Set the background color of the main content pane
+        getContentPane().setBackground(Color.DARK_GRAY);
+        
+        // Set the background color for the button panel
+        buttonPanel.setBackground(Color.DARK_GRAY);
+        
+        // Set the button colors in the button panel
+        setButtonColors(Color.BLACK, Color.WHITE);
+    }
+
+    private void setLightModeTheme() {
+        // Set the background and foreground colors for the display field
+        displayField.setBackground(Color.WHITE);
+        displayField.setForeground(Color.BLACK);
+        
+        // Set the background color of the main content pane
+        getContentPane().setBackground(Color.LIGHT_GRAY);
+        
+        // Set the background color for the button panel
+        buttonPanel.setBackground(Color.LIGHT_GRAY);
+        
+        // Set the button colors in the button panel
+        setButtonColors(Color.WHITE, Color.BLACK);
+    }
+
+    private void setButtonColors(Color backgroundColor, Color foregroundColor) {
+        // Set the background and foreground colors for all buttons in the button panel
         for (Component component : buttonPanel.getComponents()) {
             if (component instanceof JButton) {
                 JButton button = (JButton) component;
-                if (!button.getText().equals("On")) { 
+                button.setBackground(backgroundColor);
+                button.setForeground(foregroundColor);
+            }
+        }
+    }
+
+    
+    private void setButtonsEnabled(boolean enabled) {
+        // Iterate through components in the button panel
+        for (Component component : buttonPanel.getComponents()) {
+            // Check if the component is a JButton
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                // Check if the button's text is not "On"
+                if (!button.getText().equals("On")) {
+                    // Set the enabled state of the button
                     button.setEnabled(enabled);
                 }
             }
         }
     }
+
 }
