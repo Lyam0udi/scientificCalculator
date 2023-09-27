@@ -16,16 +16,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 
-// This class represents the graphical user interface (GUI) of the calculator
 public class CalculatorUI extends JFrame {
     private JTextField displayField;
     
-    private boolean isCalculatorOn = true; // Default to ON
+    private boolean isCalculatorOn = true; 
 
-    // Set dark mode as the default theme
     private boolean isDarkMode = true;
     private JPanel buttonPanel;
     
@@ -42,17 +39,14 @@ public class CalculatorUI extends JFrame {
         displayField.setEditable(false);
         displayField.setFont(new Font("Segoe UI", Font.PLAIN, 36));
         displayField.setHorizontalAlignment(JTextField.RIGHT);
-        displayField.setBackground(Color.BLACK); // Set the background color for dark mode
-        displayField.setForeground(Color.WHITE); // Set the text color for dark mode
+        displayField.setBackground(Color.BLACK); 
+        displayField.setForeground(Color.WHITE); 
         displayField.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         
-        // Allocate 20% of the frame for the display
         getContentPane().add(displayField, BorderLayout.NORTH);
         
-        // Create the button panel with a GridBagLayout for better alignment
         buttonPanel = new JPanel(new GridBagLayout());
 
-        // Define button labels
         String[] buttonLabels = {
         	"CE","On", "OFF", "Theme Mode",
             "2nd", "π", "e", "Delete",
@@ -65,7 +59,6 @@ public class CalculatorUI extends JFrame {
             "+/-", "0", ".", "="
         };
 
-        // Create and add buttons to the panel
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -91,37 +84,27 @@ public class CalculatorUI extends JFrame {
             }
         }
         
-        
-
         getContentPane().add(buttonPanel, BorderLayout.CENTER);
 
-        // Set the initial theme
         updateTheme();
        
-        setButtonsEnabled(isCalculatorOn); // Set initial state
+        setButtonsEnabled(isCalculatorOn);
 
-        
-
-        // Make the frame visible
         setVisible(true);
     }
 
-    // ActionListener for all calculator buttons
     private class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();
             String buttonText = source.getText();
 
-            // Handle button clicks here
             if (buttonText.equals("=")) {
                 String expression = displayField.getText();
                 double result = calculatorEngine.evaluateExpression(expression);
                 displayField.setText(Double.toString(result));
             } else if (buttonText.equals("CE")) {
-                // Clear the display
                 displayField.setText("");
             } else if (buttonText.equals("Theme Mode")) {
-                // Toggle theme mode
                 isDarkMode = !isDarkMode;
                 updateTheme();
             } else if (buttonText.equals("On")) {
@@ -131,7 +114,6 @@ public class CalculatorUI extends JFrame {
                 isCalculatorOn = false;
                 setButtonsEnabled(false);
             } else if (buttonText.equals("+/-")) {
-                // Negate the number currently displayed
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double currentValue = Double.parseDouble(currentText);
@@ -139,20 +121,16 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(negatedValue));
                 }
             } else if (buttonText.equals("Delete")) {
-                // Delete the last character from the display
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     String newText = currentText.substring(0, currentText.length() - 1);
                     displayField.setText(newText);
                 }
             } else if (buttonText.equals("e")) {
-                // Append the mathematical constant "e" to the display
                 displayField.setText(displayField.getText() + Math.E);
             } else if (buttonText.equals("π")) {
-                // Append the mathematical constant "π" to the display
                 displayField.setText(displayField.getText() + Math.PI);
             } else if (buttonText.equals("2nd")) {
-                // Handle the "2nd" button to calculate 2^number
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double exponent = Double.parseDouble(currentText);
@@ -160,7 +138,6 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(result));
                 }
             } else if (buttonText.equals("1/x")) {
-                // Handle the "1/x" button to calculate the reciprocal (1/x)
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -168,12 +145,10 @@ public class CalculatorUI extends JFrame {
                         double reciprocal = 1.0 / number;
                         displayField.setText(Double.toString(reciprocal));
                     } else {
-                        // Handle division by zero error if necessary
                         displayField.setText("Error: Division by zero");
                     }
                 }
             } else if (buttonText.equals("x²")) {
-                // Handle the "x²" button to calculate the square (x²)
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -181,7 +156,6 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(square));
                 }
             } else if (buttonText.equals("|x|")) {
-                // Handle the "|x|" button to calculate the absolute value (|x|)
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -189,10 +163,8 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(absoluteValue));
                 }
             } else if (buttonText.equals("x^y")) {
-                // Handle the "x^y" button to calculate exponentiation (x^y)
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
-                    // Prompt the user for the value of y
                     String yText = JOptionPane.showInputDialog("Enter the exponent (y):");
                     if (yText != null) {
                         try {
@@ -206,32 +178,28 @@ public class CalculatorUI extends JFrame {
                     }
                 }
             }else if (buttonText.equals("ln")) {
-                // Handle the "ln" button to calculate the natural logarithm (ln)
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
-                    if (number > 0) { // ln is only defined for positive numbers
+                    if (number > 0) { 
                         double lnValue = Math.log(number);
                         displayField.setText(Double.toString(lnValue));
                     } else {
-                        // Handle ln of a non-positive number error if necessary
                         displayField.setText("Error: ln of a non-positive number");
                     }
                 }
             } else if (buttonText.equals("n!")) {
-                // Handle the "n!" button to calculate the factorial (n!)
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     try {
                         int number = Integer.parseInt(currentText);
-                        if (number >= 0) { // Factorial is only defined for non-negative integers
+                        if (number >= 0) {
                             int factorial = 1;
                             for (int i = 2; i <= number; i++) {
                                 factorial *= i;
                             }
                             displayField.setText(Integer.toString(factorial));
                         } else {
-                            // Handle factorial of a negative number error if necessary
                             displayField.setText("Error: Factorial of a negative number");
                         }
                     } catch (NumberFormatException ex) {
@@ -239,7 +207,6 @@ public class CalculatorUI extends JFrame {
                     }
                 }
             } else if (buttonText.equals("exp")) {
-                // Handle the "exp" button to calculate e^x
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -247,20 +214,17 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(expValue));
                 }
             } else if (buttonText.equals("√")) {
-                // Handle the "√" button to calculate the square root
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
-                    if (number >= 0) { // Square root is only defined for non-negative numbers
+                    if (number >= 0) {
                         double sqrtValue = Math.sqrt(number);
                         displayField.setText(Double.toString(sqrtValue));
                     } else {
-                        // Handle square root of a negative number error if necessary
                         displayField.setText("Error: Square root of a negative number");
                     }
                 }
             } else if (buttonText.equals("%")) {
-                // Handle the "%" button to calculate the percentage of the displayed number
                 String currentText = displayField.getText();
                 if (!currentText.isEmpty()) {
                     double number = Double.parseDouble(currentText);
@@ -268,19 +232,13 @@ public class CalculatorUI extends JFrame {
                     displayField.setText(Double.toString(percentageValue));
                 }
             } else {
-                // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
             }
         }
     }
 
-
-
-
-    // Method to update the UI based on the current theme mode
     private void updateTheme() {
         if (isDarkMode) {
-            // Apply dark theme colors
             displayField.setBackground(Color.BLACK);
             displayField.setForeground(Color.WHITE);
             getContentPane().setBackground(Color.DARK_GRAY);
@@ -294,7 +252,6 @@ public class CalculatorUI extends JFrame {
                 }
             }
         } else {
-            // Apply white theme colors
             displayField.setBackground(Color.WHITE);
             displayField.setForeground(Color.BLACK);
             getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -308,17 +265,14 @@ public class CalculatorUI extends JFrame {
                 }
             }
         }
-        // Repaint the UI to reflect the changes
         repaint();
     }
-    
-    // Method to apply the ON/OFF Mode.
     
     private void setButtonsEnabled(boolean enabled) {
         for (Component component : buttonPanel.getComponents()) {
             if (component instanceof JButton) {
                 JButton button = (JButton) component;
-                if (!button.getText().equals("On")) { // Skip the "On" button
+                if (!button.getText().equals("On")) { 
                     button.setEnabled(enabled);
                 }
             }
