@@ -37,9 +37,11 @@ public class CalculatorEngine {
             for (int i = 0; i < expression.length(); i++) {
                 char c = expression.charAt(i);
 
-                if (Character.isDigit(c) || (unaryMinus && c == '-' && (i == 0 || Character.isDigit(expression.charAt(i - 1))))) {
-                    // If the character is a digit or a unary minus, parse the number
+                if (Character.isDigit(c) || (unaryMinus && c == '-' && (i == 0 || !Character.isDigit(expression.charAt(i - 1))))) {
+                    // Handle unary minus correctly
                     StringBuilder numBuilder = new StringBuilder();
+                    numBuilder.append(c); // Append the '-' sign
+                    i++; // Move to the next character
                     while (i < expression.length() && (Character.isDigit(expression.charAt(i)) || expression.charAt(i) == '.')) {
                         numBuilder.append(expression.charAt(i));
                         i++;
