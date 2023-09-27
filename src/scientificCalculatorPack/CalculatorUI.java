@@ -246,6 +246,19 @@ public class CalculatorUI extends JFrame {
                     double expValue = Math.exp(number);
                     displayField.setText(Double.toString(expValue));
                 }
+            } else if (buttonText.equals("√")) {
+                // Handle the "√" button to calculate the square root
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double number = Double.parseDouble(currentText);
+                    if (number >= 0) { // Square root is only defined for non-negative numbers
+                        double sqrtValue = Math.sqrt(number);
+                        displayField.setText(Double.toString(sqrtValue));
+                    } else {
+                        // Handle square root of a negative number error if necessary
+                        displayField.setText("Error: Square root of a negative number");
+                    }
+                }
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
