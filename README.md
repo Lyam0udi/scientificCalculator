@@ -46,7 +46,9 @@ java scientificCalculatorPack.Main
 </p>
 
 ### White Mode : 
-![CalculatorWhite](https://github.com/Lyam0udi/scientificCalculator/assets/67929106/ebc3881b-a3d0-48f7-a759-3c0bbc605774)
+<p align="center">
+  <img src="https://github.com/Lyam0udi/scientificCalculator/assets/67929106/ebc3881b-a3d0-48f7-a759-3c0bbc605774" alt="Calculator in Dark Mode" width="300" height="auto">
+</p>
 
 ## Usage
 - Launch the calculator by running the Main class.
