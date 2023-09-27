@@ -259,6 +259,14 @@ public class CalculatorUI extends JFrame {
                         displayField.setText("Error: Square root of a negative number");
                     }
                 }
+            } else if (buttonText.equals("%")) {
+                // Handle the "%" button to calculate the percentage of the displayed number
+                String currentText = displayField.getText();
+                if (!currentText.isEmpty()) {
+                    double number = Double.parseDouble(currentText);
+                    double percentageValue = number / 100.0;
+                    displayField.setText(Double.toString(percentageValue));
+                }
             } else {
                 // Append the button text to the display
                 displayField.setText(displayField.getText() + buttonText);
