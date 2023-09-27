@@ -21,11 +21,14 @@ import javax.swing.JTextField;
 public class CalculatorUI extends JFrame {
     private JTextField displayField;
     
+    // Flags for calculator state
     private boolean isCalculatorOn = true; 
-
     private boolean isDarkMode = true;
+    
+    // Panel for calculator buttons
     private JPanel buttonPanel;
     
+    // Calculator engine for evaluating expressions
     private CalculatorEngine calculatorEngine = new CalculatorEngine();
 
     public CalculatorUI() {
@@ -34,7 +37,7 @@ public class CalculatorUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Create the display field
+        // Create and configure the display field
         displayField = new JTextField();
         displayField.setEditable(false);
         displayField.setFont(new Font("Segoe UI", Font.PLAIN, 36));
@@ -42,11 +45,12 @@ public class CalculatorUI extends JFrame {
         displayField.setBackground(Color.BLACK); 
         displayField.setForeground(Color.WHITE); 
         displayField.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        
         getContentPane().add(displayField, BorderLayout.NORTH);
         
+        // Create the button panel for calculator buttons
         buttonPanel = new JPanel(new GridBagLayout());
 
+        // Button labels
         String[] buttonLabels = {
         	"CE","On", "OFF", "Theme Mode",
             "2nd", "π", "e", "Delete",
@@ -59,6 +63,7 @@ public class CalculatorUI extends JFrame {
             "+/-", "0", ".", "="
         };
 
+        // GridBagLayout configuration
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -68,6 +73,7 @@ public class CalculatorUI extends JFrame {
         int column = 0;
         int row = 0;
 
+        // Create and configure buttons
         for (String label : buttonLabels) {
             JButton button = new JButton(label);
             button.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -84,15 +90,17 @@ public class CalculatorUI extends JFrame {
             }
         }
         
+        // Add button panel to the center of the frame
         getContentPane().add(buttonPanel, BorderLayout.CENTER);
 
+        // Initialize the theme and button state
         updateTheme();
-       
         setButtonsEnabled(isCalculatorOn);
 
         setVisible(true);
     }
 
+    // ActionListener for calculator buttons
     private class ButtonClickListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JButton source = (JButton) e.getSource();
