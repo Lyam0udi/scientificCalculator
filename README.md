@@ -41,7 +41,9 @@ java scientificCalculatorPack.Main
 ## Demo
 
 ### Dark Mode :
-![CalculatorDark](https://github.com/Lyam0udi/scientificCalculator/assets/67929106/f4f7b731-11c3-42eb-9212-6450d786ec83)
+<p align="center">
+  <img src="https://github.com/Lyam0udi/scientificCalculator/assets/67929106/f4f7b731-11c3-42eb-9212-6450d786ec83" alt="Calculator in Dark Mode" width="300" height="auto">
+</p>
 
 ### White Mode : 
 ![CalculatorWhite](https://github.com/Lyam0udi/scientificCalculator/assets/67929106/ebc3881b-a3d0-48f7-a759-3c0bbc605774)
