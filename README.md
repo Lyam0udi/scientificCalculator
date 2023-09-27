@@ -40,6 +40,12 @@ java scientificCalculatorPack.Main
 
 ## Demo
 
+### Dark Mode :
+![CalculatorDark](https://github.com/Lyam0udi/scientificCalculator/assets/67929106/f4f7b731-11c3-42eb-9212-6450d786ec83)
+
+### White Mode : 
+![CalculatorWhite](https://github.com/Lyam0udi/scientificCalculator/assets/67929106/ebc3881b-a3d0-48f7-a759-3c0bbc605774)
+
 ## Usage
 - Launch the calculator by running the Main class.
 - Use the buttons to perform various mathematical operations.
